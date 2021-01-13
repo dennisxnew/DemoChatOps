@@ -3,7 +3,7 @@
 <Configuration status="WARN">
   <!-- 參數設定 -->
   <properties>  
-      <property name="home">/home/chendennis/chatops</property>
+      <property name="home">/home/chendennis/logs/chatops</property>
   </properties> 
   <Appenders>
   	<!-- 1. 列印在Console的Appender -->

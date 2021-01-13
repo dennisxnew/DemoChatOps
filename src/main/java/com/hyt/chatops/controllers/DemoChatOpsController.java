@@ -20,8 +20,11 @@ public class DemoChatOpsController {
 
     @RequestMapping("/getTestMessage")
     public Map<String, String> getTestMessage(){
+        log.info("Start getTestMessage");
+
         Map<String, String> result = new HashMap<>();
         result.put("message", "Demo Test Message");
+        log.info("End getTestMessage");
 
         return result;
     }
