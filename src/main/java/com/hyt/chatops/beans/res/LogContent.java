@@ -1,31 +1,38 @@
 package com.hyt.chatops.beans.res;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 /**
  * @author Dennis.Chen
- * @Date 2020-01-15
+ * @Date 2021-01-15
  * @descript 存放log資訊
  */
 public class LogContent {
 
-    String title;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    Date date;
     String level;
+    String className;
     String message;
 
     public LogContent() {
     }
 
-    public LogContent(String title, String level, String message) {
-        this.title = title;
+    public LogContent(Date date, String level, String className, String message) {
+        this.date = date;
         this.level = level;
+        this.className = className;
         this.message = message;
     }
 
-    public String getTitle() {
-        return title;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getLevel() {
@@ -34,6 +41,14 @@ public class LogContent {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getMessage() {

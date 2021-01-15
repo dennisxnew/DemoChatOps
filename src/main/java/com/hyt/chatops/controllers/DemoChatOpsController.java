@@ -1,16 +1,23 @@
 package com.hyt.chatops.controllers;
 
+import com.hyt.chatops.beans.req.ShowLogReq;
+import com.hyt.chatops.beans.res.LogContent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Dennis.Chen
@@ -136,6 +143,49 @@ public class DemoChatOpsController {
 
         return memberCards;
     }
-    
+
+    @PostMapping("getLogs")
+    public List<LogContent> getLogs(@RequestBody ShowLogReq showLogReq){
+        List<LogContent> logContentList = new ArrayList<>();
+        List<LogContent> result = new ArrayList<>();
+        SimpleDateFormat requestSf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        try {
+            Date startTime = requestSf.parse(showLogReq.getStart());
+            Date endTime = requestSf.parse(showLogReq.getEnd());
+
+
+            //1. 初始Test資料
+            logContentList.add(new LogContent(sf.parse("2021-01-02 21:01:12.191"), "WARN", "com.demo.service.LoginServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-03 12:11:12.282"), "WARN", "com.demo.service.AccountServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-04 23:23:12.373"), "WARN", "com.demo.service.PaymentServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-05 08:55:12.454"), "ERROR", "com.demo.service.LoginServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-05 09:17:12.546"), "ERROR", "com.demo.service.PaymentServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-05 10:10:12.637"), "ERROR", "com.demo.service.FulfillmentServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-06 03:27:12.728"), "ERROR", "com.demo.service.OrderServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-06 13:59:12.829"), "ERROR", "com.demo.service.OrderServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-03 07:33:12.189"), "ERROR", "com.demo.service.EmailServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-04 01:51:12.193"), "FATAL", "com.demo.service.PaymentServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+            logContentList.add(new LogContent(sf.parse("2021-01-05 11:27:12.169"), "FATAL", "com.demo.service.OrderServiceImpl", "Exception in thread \"main\" java.nio.file.NoSuchFileException: players.dat <-- players.dat file doesn't exist at sun.nio.fs.WindowsException.translateToIOException(Unknown Source) at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at java.nio.file.Files.readAllLines(Unknown Source) at Exceptions.getPlayers(Exceptions.java:12) <-- Exception arises in getPlayers() method, on line 12 at Exceptions.main(Exceptions.java:19) <-- getPlayers() is called by main(), on line 19"));
+
+            List<String> levelList;
+            if (showLogReq.getLevel() != null || showLogReq.getLevel().length() > 0) {
+                levelList = Arrays.asList(showLogReq.getLevel().split(","));
+            } else {
+                levelList = Arrays.asList("WARN", "ERROR", "FATAL");
+            }
+
+            //2. 過濾資料
+            result = logContentList.stream().filter(item -> levelList.contains(item.getLevel()))
+                                            .filter(item -> item.getDate().after(startTime) && item.getDate().before(endTime))
+                                            .collect(Collectors.toList());
+
+        }catch (Exception e){
+            log.error("取得log發生異常", e);
+        }
+        
+
+        return result;
+    }
 
 }
