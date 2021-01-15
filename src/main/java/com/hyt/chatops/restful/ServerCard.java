@@ -1,9 +1,9 @@
 package com.hyt.chatops.restful;
 
-import com.hyt.chatops.uibeans.ActionSet;
-import com.hyt.chatops.uibeans.ColumnSet;
-import com.hyt.chatops.uibeans.FactSet;
-import com.hyt.chatops.uibeans.TextBlock;
+import com.hyt.chatops.beans.res.ActionSet;
+import com.hyt.chatops.beans.res.ColumnSet;
+import com.hyt.chatops.beans.res.FactSet;
+import com.hyt.chatops.beans.res.TextBlock;
 
 public class ServerCard {
     private TextBlock textBlock;

@@ -1,10 +1,9 @@
 package com.hyt.chatops.controllers;
 
-import com.hyt.chatops.restful.ServerCard;
-import com.hyt.chatops.uibeans.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -137,6 +136,6 @@ public class DemoChatOpsController {
 
         return memberCards;
     }
-
+    
 
 }

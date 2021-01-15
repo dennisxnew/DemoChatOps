@@ -1,4 +1,4 @@
-package com.hyt.chatops.uibeans;
+package com.hyt.chatops.beans.res;
 
 public class Fact {
     private String title;
