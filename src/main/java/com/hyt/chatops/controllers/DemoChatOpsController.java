@@ -134,12 +134,20 @@ public class DemoChatOpsController {
         memberCard4.put("position","PG");
         memberCard4.put("phone","0912-123-123");
         memberCard4.put("Email","member4@example.com");
+        Map<String, String> memberCard5 = new HashMap<>();
+        memberCard4.put("name","黃子青");
+        memberCard4.put("enName","tc.huang");
+        memberCard4.put("profileImage","http://demochatops.azurewebsites.net/img/l.png");
+        memberCard4.put("position","PM");
+        memberCard4.put("phone","0912-123-123");
+        memberCard4.put("Email","member5@example.com");
 
         List<Map<String, String>> memberCards = new ArrayList<>();
         memberCards.add(memberCard1);
         memberCards.add(memberCard2);
         memberCards.add(memberCard3);
         memberCards.add(memberCard4);
+        memberCards.add(memberCard5);
 
         return memberCards;
     }
